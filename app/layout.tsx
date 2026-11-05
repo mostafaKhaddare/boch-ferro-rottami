@@ -25,6 +25,9 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
     shortcut: ["/favicon.ico"]
   },
+  verification: {
+    google: "DpMjB0T5x_tUthToHe_m7h5C2fNmQtRigagMM8oQYi4"
+  },
   alternates: { canonical: "/" },
   robots: { index: true, follow: true },
   openGraph: {
