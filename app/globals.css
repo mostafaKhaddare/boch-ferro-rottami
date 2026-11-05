@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+:root {
+  --boch-yellow: #ffc400;
+  --boch-black: #050505;
+  --boch-charcoal: #111111;
+  --boch-metal: #bfc3c7;
+  --boch-white: #ffffff;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--boch-black);
+  color: var(--boch-white);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+::selection {
+  background: var(--boch-yellow);
+  color: var(--boch-black);
+}
+
+.container-boch {
+  width: min(1180px, calc(100% - 2rem));
+  margin-inline: auto;
+}
+
+.industrial-grid {
+  background-image:
+    linear-gradient(rgba(255, 196, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 196, 0, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.metal-noise {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,.08), transparent 28%),
+    radial-gradient(circle at 80% 70%, rgba(255,196,0,.07), transparent 24%),
+    linear-gradient(135deg, #111 0%, #070707 45%, #161616 100%);
+}
+
+.yellow-line {
+  position: relative;
+}
+
+.yellow-line::after {
+  content: "";
+  display: block;
+  width: 68px;
+  height: 4px;
+  margin-top: 14px;
+  background: var(--boch-yellow);
+}
+
+.focus-ring:focus-visible {
+  outline: 3px solid var(--boch-yellow);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .lift {
+    transition: transform .2s ease, border-color .2s ease, background-color .2s ease;
+  }
+  .lift:hover {
+    transform: translateY(-4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
