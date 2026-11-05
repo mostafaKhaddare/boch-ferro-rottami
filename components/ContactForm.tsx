@@ -1,4 +1,4 @@
- "use client";
+﻿"use client";
 
 import { FormEvent, useState } from "react";
 import { Send, Upload } from "lucide-react";
@@ -18,23 +18,23 @@ export default function ContactForm() {
       <div className="grid gap-5 md:grid-cols-2">
         <label className="text-sm font-bold">
           Nome *
-          <input required name="nome" className="focus-ring mt-2 w-full border border-white/15 bg-black px-4 py-3 outline-none" />
+          <input required name="nome" autoComplete="name" className="focus-ring mt-2 w-full border border-white/15 bg-black px-4 py-3 outline-none" />
         </label>
         <label className="text-sm font-bold">
           Azienda
-          <input name="azienda" className="focus-ring mt-2 w-full border border-white/15 bg-black px-4 py-3 outline-none" />
+          <input name="azienda" autoComplete="organization" className="focus-ring mt-2 w-full border border-white/15 bg-black px-4 py-3 outline-none" />
         </label>
         <label className="text-sm font-bold">
           Telefono *
-          <input required type="tel" name="telefono" className="focus-ring mt-2 w-full border border-white/15 bg-black px-4 py-3 outline-none" />
+          <input required type="tel" name="telefono" autoComplete="tel" className="focus-ring mt-2 w-full border border-white/15 bg-black px-4 py-3 outline-none" />
         </label>
         <label className="text-sm font-bold">
           Email
-          <input type="email" name="email" className="focus-ring mt-2 w-full border border-white/15 bg-black px-4 py-3 outline-none" />
+          <input type="email" name="email" autoComplete="email" className="focus-ring mt-2 w-full border border-white/15 bg-black px-4 py-3 outline-none" />
         </label>
         <label className="text-sm font-bold">
           Comune *
-          <input required name="comune" className="focus-ring mt-2 w-full border border-white/15 bg-black px-4 py-3 outline-none" />
+          <input required name="comune" autoComplete="address-level2" className="focus-ring mt-2 w-full border border-white/15 bg-black px-4 py-3 outline-none" />
         </label>
         <label className="text-sm font-bold">
           Tipo di materiale *
@@ -50,8 +50,8 @@ export default function ContactForm() {
           </select>
         </label>
         <label className="text-sm font-bold md:col-span-2">
-          Quantità stimata
-          <input name="quantita" placeholder="Es. 500 kg / 2 cassoni / quantità indicativa" className="focus-ring mt-2 w-full border border-white/15 bg-black px-4 py-3 outline-none" />
+          Quantità indicativa
+          <input name="quantita" placeholder="Es. quantità indicativa, cassoni o materiale presente" className="focus-ring mt-2 w-full border border-white/15 bg-black px-4 py-3 outline-none" />
         </label>
         <label className="text-sm font-bold md:col-span-2">
           Messaggio *
@@ -60,7 +60,7 @@ export default function ContactForm() {
         <label className="md:col-span-2">
           <span className="text-sm font-bold">Foto del materiale (opzionale)</span>
           <span className="mt-2 flex cursor-pointer items-center gap-3 border border-dashed border-white/20 bg-black px-4 py-4 text-sm text-white/60 hover:border-[#ffc400]">
-            <Upload size={18} />
+            <Upload size={18} aria-hidden="true" />
             {fileName || "Scegli una foto"}
             <input
               type="file"
@@ -73,16 +73,18 @@ export default function ContactForm() {
       </div>
 
       {submitted ? (
-        <div className="mt-6 border border-[#ffc400]/40 bg-[#ffc400]/10 p-5 text-sm leading-6">
-          <strong>Richiesta preparata.</strong> Il modulo è pronto per essere collegato a un endpoint email/CRM. Per il contatto immediato, usa WhatsApp.
-          <a
-            href={getWhatsAppUrl("Buongiorno, vorrei richiedere un ritiro di rottami metallici.")}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 inline-flex bg-[#ffc400] px-5 py-3 font-black text-black"
-          >
-            CONTATTA SU WHATSAPP
-          </a>
+        <div className="mt-6 border border-[#ffc400]/40 bg-[#ffc400]/10 p-5 text-sm leading-6" role="status">
+          <strong>Richiesta registrata localmente.</strong> Collega questo modulo al tuo endpoint email/CRM per l&apos;invio effettivo.
+          {business.whatsapp ? (
+            <a
+              href={getWhatsAppUrl("Buongiorno, vorrei informazioni su recupero rottami metallici.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex bg-[#ffc400] px-5 py-3 font-black text-black"
+            >
+              CONTATTA SU WHATSAPP
+            </a>
+          ) : null}
         </div>
       ) : (
         <button type="submit" className="focus-ring mt-7 inline-flex min-h-14 items-center gap-2 bg-[#ffc400] px-7 font-black text-black hover:bg-white">
@@ -91,8 +93,7 @@ export default function ContactForm() {
       )}
 
       <p className="mt-5 text-xs leading-5 text-white/40">
-        * Campi obbligatori. Nessun invio email viene simulato: collega il form al tuo provider/API quando configuri la parte backend.
-        {business.email ? ` Email configurata: ${business.email}` : ""}
+        * Campi obbligatori. Il modulo va collegato a un provider/API prima dell&apos;uso in produzione.
       </p>
     </form>
   );

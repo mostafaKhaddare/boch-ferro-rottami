@@ -1,9 +1,10 @@
-import type { MetadataRoute } from "next";
+﻿import type { MetadataRoute } from "next";
 import { business } from "@/lib/constants";
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [{ userAgent: "*", allow: "/" }],
-    sitemap: `${business.siteUrl}/sitemap.xml`
+    sitemap: `${business.siteUrl}/sitemap.xml`,
+    host: business.siteUrl
   };
 }

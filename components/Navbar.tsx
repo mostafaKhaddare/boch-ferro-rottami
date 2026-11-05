@@ -1,9 +1,9 @@
- "use client";
+﻿"use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
 
 const links = [
   ["Home", "/"],
@@ -12,7 +12,7 @@ const links = [
   ["Per Aziende", "/aziende"],
   ["Zona di Ritiro", "/zona-di-ritiro"],
   ["Contatti", "/contatti"]
-];
+] as const;
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -20,7 +20,7 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-[#050505]/95 backdrop-blur">
       <div className="container-boch flex h-20 items-center justify-between gap-6">
-        <Link href="/" aria-label="BOCH FERRO ROTTAMI - Home" onClick={() => setOpen(false)}>
+        <Link href="/" aria-label="BOCH FERRO ROTTAMI - Home" onClick={() => setOpen(false)} className="focus-ring">
           <Image
             src="/images/boch-logo.png"
             alt="BOCH FERRO ROTTAMI"
@@ -47,7 +47,7 @@ export default function Navbar() {
           href="/contatti"
           className="focus-ring hidden bg-[#ffc400] px-5 py-3 text-sm font-black text-black transition hover:bg-white lg:block"
         >
-          RICHIEDI UN RITIRO
+          RICHIEDI UN PREVENTIVO
         </Link>
 
         <button
@@ -63,7 +63,7 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <nav id="mobile-navigation" className="border-t border-white/10 bg-[#111111] lg:hidden">
+        <nav id="mobile-navigation" className="border-t border-white/10 bg-[#111111] lg:hidden" aria-label="Navigazione mobile">
           <div className="container-boch flex flex-col py-3">
             {links.map(([label, href]) => (
               <Link
@@ -80,7 +80,7 @@ export default function Navbar() {
               onClick={() => setOpen(false)}
               className="mt-3 bg-[#ffc400] px-4 py-4 text-center text-sm font-black text-black"
             >
-              RICHIEDI UN RITIRO
+              RICHIEDI UN PREVENTIVO
             </Link>
           </div>
         </nav>

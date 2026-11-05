@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 
 const customers = [
@@ -20,10 +20,10 @@ export default function BusinessSection() {
             SEI UN&apos;AZIENDA?
           </h2>
           <p className="mt-7 max-w-2xl text-2xl font-black">
-            Hai rottami metallici da ritirare?
+            Hai rottami metallici da gestire?
           </p>
           <p className="mt-4 max-w-2xl leading-7 text-white/65">
-            Ci rivolgiamo a imprese e attività che producono rottami metallici e vogliono organizzare un ritiro.
+            Ci rivolgiamo ad attività che producono rottami metallici e cercano soluzioni da concordare in base al materiale e alle esigenze operative.
           </p>
           <Link
             href="/contatti"
@@ -34,7 +34,7 @@ export default function BusinessSection() {
         </div>
 
         <div className="border border-white/10 bg-black/40 p-7">
-          <p className="mb-5 text-xs font-black uppercase tracking-widest text-white/45">Clienti ideali</p>
+          <p className="mb-5 text-xs font-black uppercase tracking-widest text-white/45">Attività interessate</p>
           <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
             {customers.map((customer) => (
               <li key={customer} className="flex items-center gap-3 text-sm font-bold">
