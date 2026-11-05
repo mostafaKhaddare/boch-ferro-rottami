@@ -58,7 +58,7 @@
 
 export const heroSlides = [
   {
-    image: "/images/hero/rottami-metallici.jpg",
+    image: "/images/hero/boch-hero.png",
     alt: "Raccolta industriale di rottami ferrosi selezionati",
     eyebrow: "Rottami metallici",
     title: "Recupero e Commercio di Rottami Metallici",
@@ -68,7 +68,7 @@ export const heroSlides = [
     ctaHref: "/servizi"
   },
   {
-    image: "/images/hero/metalli-non-ferrosi.jpg",
+    image: "/images/hero/boch-hero.png",
     alt: "Metalli non ferrosi selezionati in ambiente industriale",
     eyebrow: "Metalli non ferrosi",
     title: "Valorizziamo Ogni Tipo di Metallo",
@@ -78,7 +78,7 @@ export const heroSlides = [
     ctaHref: "/contatti"
   },
   {
-    image: "/images/hero/recupero-industriale.jpg",
+    image: "/images/hero/boch-hero.png",
     alt: "Operazioni industriali di recupero materiali metallici",
     eyebrow: "Recupero industriale",
     title: "Il Recupero dei Metalli, con Professionalità",
