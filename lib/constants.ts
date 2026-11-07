@@ -91,6 +91,22 @@ export const heroSlides = [
 
 export const services = [
   {
+    title: "Ritiro rottami metallici per privati",
+    image: "/images/servizi/privati.jpg",
+    alt: "Ritiro rottami metallici per privati",
+    description:
+      "Ritiriamo ferro vecchio, cancelli, scaffali, reti metalliche, biciclette e altri oggetti metallici direttamente presso abitazioni e proprietà private.",
+    icon: "hardhat"
+  },
+   {
+    title: "Ritiro Ferro Vecchio da Privati",
+    image: "/images/servizi/Ritiro Ferro Vecchio da Privati.jpg",
+    alt: "Ritiro Ferro Vecchio da Privati",
+    description:
+      "Ritiriamo ferro vecchio e materiali metallici direttamente a casa tua, in garage e nelle proprietà private",
+    icon: "hardhat"
+  },
+  {
     title: "Ritiro rottami da case, cascine e aziende agricole",
     image: "/images/servizi/Ritiro-rottami-abitazioni-aziende-agricole.jpg",
     alt: "Ritiro rottami da case, cascine e aziende agricole",
@@ -114,30 +130,8 @@ export const services = [
       "Ci occupiamo della selezione e della separazione dei rottami metallici, distinguendo i materiali ferrosi da quelli non ferrosi per favorire il recupero e il riciclo delle risorse.",
     icon: "truck"
   },
-  {
-    title: "Acquisto rottami metallici",
-    image: "/images/servizi/acquisto-rottami.jpg",
-    alt: "Acquisto rottami metallici",
-    description:
-      "Acquistiamo diverse tipologie di rottami metallici, tra cui ferro, acciaio, rame, ottone e alluminio. Valutiamo i materiali in base alla tipologia, alla qualità e alle quantità disponibili.",
-    icon: "building"
-  },
-  {
-    title: "Ritiro rottami metallici per privati",
-    image: "/images/servizi/privati.jpg",
-    alt: "Ritiro rottami metallici per privati",
-    description:
-      "Ritiriamo ferro vecchio, cancelli, scaffali, reti metalliche, biciclette e altri oggetti metallici direttamente presso abitazioni e proprietà private.",
-    icon: "hardhat"
-  },
-  {
-    title: "Ritiro Ferro Vecchio da Privati",
-    image: "/images/servizi/Ritiro Ferro Vecchio da Privati.jpg",
-    alt: "Ritiro Ferro Vecchio da Privati",
-    description:
-      "Ritiriamo ferro vecchio e materiali metallici direttamente a casa tua, in garage e nelle proprietà private",
-    icon: "hardhat"
-  },
+  
+  
   
 ] as const;
 

@@ -31,6 +31,7 @@ export default function HomePage() {
   return (
     <>
       <Hero slides={heroSlides} />
+            <ServiceArea />
 
       <section className="bg-[#050505] py-16">
         <div className="container-boch grid gap-5 md:grid-cols-3">
@@ -49,7 +50,6 @@ export default function HomePage() {
           ))}
         </div>
       </section>
-            <ServiceArea />
 
 
       <section className="container-boch py-20" id="materiali">
