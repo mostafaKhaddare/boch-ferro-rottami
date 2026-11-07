@@ -91,53 +91,54 @@ export const heroSlides = [
 
 export const services = [
   {
-    title: "Recupero Rottami Ferrosi",
-    image: "/images/servizi/rottami-ferrosi.jpg",
-    alt: "Rottami ferrosi in un piazzale di recupero industriale",
+    title: "Ritiro rottami da case, cascine e aziende agricole",
+    image: "/images/servizi/Ritiro-rottami-abitazioni-aziende-agricole.jpg",
+    alt: "Ritiro rottami da case, cascine e aziende agricole",
     description:
-      "Raccolta e recupero di rottami ferrosi, ferro e acciaio provenienti da attività industriali, artigianali e privati.",
+      "Hai vecchio ferro da eliminare? Organizziamo il ritiro di rottami metallici da abitazioni, cascine, cortili e aziende agricole.",
     icon: "factory"
   },
   {
-    title: "Recupero Metalli Non Ferrosi",
-    image: "/images/servizi/metalli-non-ferrosi.jpg",
-    alt: "Rame, ottone e alluminio selezionati per il recupero",
+    title: "Ritiro rottami metallici",
+    image: "/images/servizi/ritiro-rottami-mitalici.jpg",
+    alt: "Ritiro rottami metallici",
     description:
-      "Gestione e valorizzazione di metalli non ferrosi come rame, ottone e alluminio.",
+      "Offriamo servizi di ritiro di rottami metallici direttamente presso aziende, officine e cantieri. Raccogliamo diverse tipologie di materiali ferrosi e non ferrosi, organizzando il servizio in base alle esigenze del cliente.",
     icon: "coins"
   },
   {
-    title: "Raccolta Rottami Metallici",
-    image: "/images/servizi/raccolta-rottami.jpg",
+    title: "Recupero e selezione metalli",
+    image: "/images/servizi/recopero-rotami.jpg",
     alt: "Mezzi e contenitori per la raccolta di rottami metallici",
     description:
-      "Servizi di raccolta di materiali metallici, con soluzioni da concordare in base alle esigenze del cliente.",
+      "Ci occupiamo della selezione e della separazione dei rottami metallici, distinguendo i materiali ferrosi da quelli non ferrosi per favorire il recupero e il riciclo delle risorse.",
     icon: "truck"
   },
   {
-    title: "Ritiro Rottami da Aziende",
-    image: "/images/servizi/ritiro-aziende.jpg",
-    alt: "Area industriale con materiali metallici pronti per il ritiro",
+    title: "Acquisto rottami metallici",
+    image: "/images/servizi/acquisto-rottami.jpg",
+    alt: "Acquisto rottami metallici",
     description:
-      "Soluzioni per aziende, officine, imprese e attività produttive che necessitano di gestire i propri rottami metallici.",
+      "Acquistiamo diverse tipologie di rottami metallici, tra cui ferro, acciaio, rame, ottone e alluminio. Valutiamo i materiali in base alla tipologia, alla qualità e alle quantità disponibili.",
     icon: "building"
   },
   {
-    title: "Recupero da Cantieri",
-    image: "/images/servizi/recupero-cantieri.jpg",
-    alt: "Cantiere edile con materiali metallici separati",
+    title: "Ritiro rottami metallici per privati",
+    image: "/images/servizi/privati.jpg",
+    alt: "Ritiro rottami metallici per privati",
     description:
-      "Recupero di materiali metallici provenienti da cantieri edili e attività di demolizione, nel rispetto delle normative applicabili.",
+      "Ritiriamo ferro vecchio, cancelli, scaffali, reti metalliche, biciclette e altri oggetti metallici direttamente presso abitazioni e proprietà private.",
     icon: "hardhat"
   },
   {
-    title: "Commercio di Rottami Metallici",
-    image: "/images/servizi/commercio-rottami.jpg",
-    alt: "Materiali metallici selezionati pronti per la valorizzazione",
+    title: "Ritiro Ferro Vecchio da Privati",
+    image: "/images/servizi/Ritiro Ferro Vecchio da Privati.jpg",
+    alt: "Ritiro Ferro Vecchio da Privati",
     description:
-      "Valorizzazione e commercio di materiali metallici recuperabili secondo le caratteristiche e la qualità del materiale.",
-    icon: "scale"
-  }
+      "Ritiriamo ferro vecchio e materiali metallici direttamente a casa tua, in garage e nelle proprietà private",
+    icon: "hardhat"
+  },
+  
 ] as const;
 
 export function getWhatsAppUrl(message?: string) {

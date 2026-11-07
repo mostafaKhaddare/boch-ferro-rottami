@@ -85,9 +85,7 @@ export default function Hero({ slides }: { slides: readonly Slide[] }) {
         </div>
       ))}
 
-      <div className="absolute inset-0 bg-black/60" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-black/25" />
-      <div className="absolute inset-0 industrial-grid opacity-30" />
+      
 
       <div className="container-boch relative flex min-h-[620px] items-center py-20 sm:min-h-[720px]">
         <div className="max-w-4xl" aria-live="polite">

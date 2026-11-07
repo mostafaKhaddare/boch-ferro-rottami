@@ -49,6 +49,8 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+            <ServiceArea />
+
 
       <section className="container-boch py-20" id="materiali">
         <div className="mb-10 flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
@@ -96,7 +98,6 @@ export default function HomePage() {
 
       <BusinessSection />
 
-      <ServiceArea />
 
       <section className="bg-[#0b0b0b] py-20">
         <div className="container-boch">
