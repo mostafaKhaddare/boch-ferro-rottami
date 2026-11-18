@@ -2,9 +2,11 @@
 import { business } from "@/lib/constants";
 
 export default function robots(): MetadataRoute.Robots {
+  const baseUrl = business.siteUrl.replace(/\/$/, "");
+
   return {
     rules: [{ userAgent: "*", allow: "/" }],
-    sitemap: `${business.siteUrl}/sitemap.xml`,
-    host: business.siteUrl
+    sitemap: `${baseUrl}/sitemap.xml`,
+    host: baseUrl
   };
 }

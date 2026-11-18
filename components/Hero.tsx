@@ -123,12 +123,16 @@ export default function Hero({ slides }: { slides: readonly Slide[] }) {
                 key={slide.image}
                 type="button"
                 onClick={() => goTo(i)}
-                className={`focus-ring h-2.5 transition-all motion-reduce:transition-none ${
-                  i === index ? "w-10 bg-[#ffc400]" : "w-2.5 bg-white/35 hover:bg-white/70"
-                }`}
+                className="focus-ring group flex h-11 w-11 items-center justify-center"
                 aria-label={`Vai alla slide ${i + 1}`}
                 aria-current={i === index}
-              />
+              >
+                <span
+                  className={`block h-2.5 transition-all motion-reduce:transition-none ${
+                    i === index ? "w-10 bg-[#ffc400]" : "w-2.5 bg-white/35 group-hover:bg-white/70"
+                  }`}
+                />
+              </button>
             ))}
           </div>
           <div className="pointer-events-auto flex gap-2">

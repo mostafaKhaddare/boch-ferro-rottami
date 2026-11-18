@@ -1,6 +1,7 @@
 ﻿import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Check, Factory } from "lucide-react";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Per Aziende",
@@ -19,7 +20,9 @@ const points = [
 
 export default function AziendePage() {
   return (
-    <div>
+    <>
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Per Aziende" }]} />
+      <div>
       <section className="metal-noise border-b border-white/10">
         <div className="container-boch py-20 sm:py-28">
           <Factory className="text-[#ffc400]" size={42} aria-hidden="true" />
@@ -38,9 +41,14 @@ export default function AziendePage() {
           <p className="mt-5 leading-7 text-white/65">
             Officine meccaniche, fabbri, carpenterie, serramentisti, elettricisti, idraulici, imprese edili, aziende agricole e attività industriali.
           </p>
-          <Link href="/contatti" className="focus-ring mt-8 inline-flex items-center gap-2 bg-[#ffc400] px-6 py-4 font-black text-black">
+          <Link href="/contatti?servizio=ritiro-rottami-aziende" className="focus-ring mt-8 inline-flex items-center gap-2 bg-[#ffc400] px-6 py-4 font-black text-black">
             RICHIEDI INFORMAZIONI <ArrowRight size={18} />
           </Link>
+          <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm font-bold">
+            <Link href="/servizi/ritiro-rottami-aziende" className="focus-ring text-[#ffc400] hover:text-white">Ritiro per aziende</Link>
+            <Link href="/servizi/ritiro-rottami-cantieri" className="focus-ring text-[#ffc400] hover:text-white">Ritiro da cantieri</Link>
+            <Link href="/servizi/acquisto-rottami-metallici" className="focus-ring text-[#ffc400] hover:text-white">Acquisto rottami</Link>
+          </div>
         </div>
         <div className="border border-white/10 bg-[#111111] p-7">
           <ul className="grid gap-5">
@@ -52,6 +60,7 @@ export default function AziendePage() {
           </ul>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 }

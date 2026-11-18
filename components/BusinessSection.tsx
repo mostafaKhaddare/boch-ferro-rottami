@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 
 const customers = [
@@ -34,7 +34,7 @@ export default function BusinessSection() {
         </div>
 
         <div className="border border-white/10 bg-black/40 p-7">
-          <p className="mb-5 text-xs font-black uppercase tracking-widest text-white/45">Attività interessate</p>
+          <p className="mb-5 text-xs font-black uppercase tracking-widest text-white/60">Attività interessate</p>
           <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
             {customers.map((customer) => (
               <li key={customer} className="flex items-center gap-3 text-sm font-bold">

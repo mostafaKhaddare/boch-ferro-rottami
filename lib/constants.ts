@@ -1,4 +1,6 @@
-﻿export const business = {
+﻿import { serviceAreas } from "./areas";
+
+export const business = {
   name: "BOCH FERRO ROTTAMI",
   tagline: "Recupero e commercio di rottami metallici",
   description:
@@ -8,14 +10,7 @@
   email: process.env.NEXT_PUBLIC_EMAIL ?? "",
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bochferrorottami.it",
   areaServedName: "Piemonte",
-  areas: [
-    "Nizza Monferrato",
-    "Canelli",
-    "Calamandrana",
-    "Incisa Scapaccino",
-    "Acqui Terme",
-    "Asti"
-  ],
+  areas: serviceAreas.map((area) => area.name),
   materials: [
     {
       name: "Ferro",
@@ -56,87 +51,44 @@
   ]
 } as const;
 
+/** Immagini esistenti nel progetto: la prima è ottimizzata in WebP per il carico iniziale. */
 export const heroSlides = [
   {
-    image: "/images/hero/boch-hero.png",
+    image: "/images/hero/boch-hero.webp",
     alt: "Raccolta industriale di rottami ferrosi selezionati",
     eyebrow: "Rottami metallici",
     title: "Recupero e Commercio di Rottami Metallici",
     subtitle:
-      "Soluzioni professionali per il recupero, la raccolta e la valorizzazione dei metalli.",
+      "Ritiro, selezione e valorizzazione di ferro, acciaio e metalli non ferrosi per aziende e privati in Piemonte.",
     ctaLabel: "Scopri i nostri servizi",
     ctaHref: "/servizi"
   },
   {
-    image: "/images/hero/boch-hero.png",
-    alt: "Metalli non ferrosi selezionati in ambiente industriale",
-    eyebrow: "Metalli non ferrosi",
-    title: "Valorizziamo Ogni Tipo di Metallo",
+    image: "/images/servizi/ritiro-rottami-mitalici.jpg",
+    alt: "Ritiro di rottami metallici presso un'attività",
+    eyebrow: "Ritiro e raccolta",
+    title: "Ritiriamo i Tuoi Rottami Metallici",
     subtitle:
-      "Raccolta e gestione di ferro, rame, ottone, alluminio e altri materiali metallici.",
-    ctaLabel: "Contattaci",
-    ctaHref: "/contatti"
+      "Ritiri organizzati per privati, aziende, officine, cantieri e attività agricole nelle aree servite.",
+    ctaLabel: "Richiedi un ritiro",
+    ctaHref: "/servizi/ritiro-rottami-privati"
   },
   {
-    image: "/images/hero/boch-hero.png",
-    alt: "Operazioni industriali di recupero materiali metallici",
-    eyebrow: "Recupero industriale",
-    title: "Il Recupero dei Metalli, con Professionalità",
+    image: "/images/servizi/recopero-rotami.jpg",
+    alt: "Selezione di materiali metallici per il recupero",
+    eyebrow: "Recupero e selezione",
+    title: "Ogni Metallo, al Giusto Recupero",
     subtitle:
-      "Un servizio orientato al recupero delle risorse e all'economia circolare.",
-    ctaLabel: "Richiedi informazioni",
-    ctaHref: "/contatti"
+      "Separiamo materiali ferrosi e non ferrosi per indirizzarli correttamente al recupero delle risorse.",
+    ctaLabel: "Scopri come lavoriamo",
+    ctaHref: "/servizi/recupero-selezione-metalli"
   }
 ] as const;
 
-export const services = [
-  {
-    title: "Ritiro rottami metallici per privati",
-    image: "/images/servizi/privati.jpg",
-    alt: "Ritiro rottami metallici per privati",
-    description:
-      "Ritiriamo ferro vecchio, cancelli, scaffali, reti metalliche, biciclette e altri oggetti metallici direttamente presso abitazioni e proprietà private.",
-    icon: "hardhat"
-  },
-   {
-    title: "Ritiro Ferro Vecchio da Privati",
-    image: "/images/servizi/Ritiro Ferro Vecchio da Privati.jpg",
-    alt: "Ritiro Ferro Vecchio da Privati",
-    description:
-      "Ritiriamo ferro vecchio e materiali metallici direttamente a casa tua, in garage e nelle proprietà private",
-    icon: "hardhat"
-  },
-  {
-    title: "Ritiro rottami da case, cascine e aziende agricole",
-    image: "/images/servizi/Ritiro-rottami-abitazioni-aziende-agricole.jpg",
-    alt: "Ritiro rottami da case, cascine e aziende agricole",
-    description:
-      "Hai vecchio ferro da eliminare? Organizziamo il ritiro di rottami metallici da abitazioni, cascine, cortili e aziende agricole.",
-    icon: "factory"
-  },
-  {
-    title: "Ritiro rottami metallici",
-    image: "/images/servizi/ritiro-rottami-mitalici.jpg",
-    alt: "Ritiro rottami metallici",
-    description:
-      "Offriamo servizi di ritiro di rottami metallici direttamente presso aziende, officine e cantieri. Raccogliamo diverse tipologie di materiali ferrosi e non ferrosi, organizzando il servizio in base alle esigenze del cliente.",
-    icon: "coins"
-  },
-  {
-    title: "Recupero e selezione metalli",
-    image: "/images/servizi/recopero-rotami.jpg",
-    alt: "Mezzi e contenitori per la raccolta di rottami metallici",
-    description:
-      "Ci occupiamo della selezione e della separazione dei rottami metallici, distinguendo i materiali ferrosi da quelli non ferrosi per favorire il recupero e il riciclo delle risorse.",
-    icon: "truck"
-  },
-  
-  
-  
-] as const;
-
 export function getWhatsAppUrl(message?: string) {
-  const number = business.whatsapp.replace(/\D/g, "");
+  const raw = business.whatsapp.trim();
+  if (!raw || /X/i.test(raw)) return "#";
+  const number = raw.replace(/\D/g, "");
   if (!number) return "#";
   const text =
     message ??
@@ -145,6 +97,18 @@ export function getWhatsAppUrl(message?: string) {
 }
 
 export function getPhoneUrl() {
-  const number = business.phone.replace(/[^\d+]/g, "");
-  return number ? `tel:${number}` : "#";
+  const raw = business.phone.trim();
+  if (!raw || /X/i.test(raw)) return "#";
+  const number = raw.replace(/[^\d+]/g, "");
+  if (!number) return "#";
+  return `tel:${number}`;
+}
+
+/** I pulsanti di contatto vengono mostrati solo con numeri reali configurati. */
+export function hasWhatsApp() {
+  return getWhatsAppUrl() !== "#";
+}
+
+export function hasPhone() {
+  return getPhoneUrl() !== "#";
 }
