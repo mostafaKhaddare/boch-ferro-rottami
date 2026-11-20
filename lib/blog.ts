@@ -78,7 +78,7 @@ export const blogPosts: BlogPost[] = [
         bullets: [
           "Segnala se il materiale è in garage, cortile, cascina, cantiere o officina.",
           "Indica eventuali scale, passaggi stretti o ostacoli.",
-          "Se gli oggetti sono pesanti o fuori uso, descrivi le condizioni générali.",
+          "Se gli oggetti sono pesanti o fuori uso, descrivi le condizioni generali.",
         ],
       },
       {

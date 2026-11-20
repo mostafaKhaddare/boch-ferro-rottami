@@ -9,6 +9,7 @@ import BusinessSection from "@/components/BusinessSection";
 import ServiceArea from "@/components/ServiceArea";
 import FAQ from "@/components/FAQ";
 import { business, heroSlides } from "@/lib/constants";
+import { blogPosts } from "@/lib/blog";
 import { services } from "@/lib/services";
 
 export const metadata: Metadata = {
@@ -127,11 +128,42 @@ export default function HomePage() {
 
       <BusinessSection />
 
+      <section className="container-boch py-20">
+        <div className="mb-10 flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
+          <div>
+            <p className="text-sm font-black uppercase tracking-[0.2em] text-[#ffc400]">Guide e approfondimenti</p>
+            <h2 className="yellow-line mt-3 text-4xl font-black uppercase sm:text-5xl">DAL BLOG</h2>
+          </div>
+          <Link href="/blog" className="focus-ring inline-flex items-center gap-2 text-sm font-black text-[#ffc400] hover:text-white">
+            TUTTI GLI ARTICOLI <ArrowRight size={17} />
+          </Link>
+        </div>
+        <div className="grid gap-5 md:grid-cols-3">
+          {blogPosts.slice(0, 3).map((post) => (
+            <article key={post.slug} className="group border border-white/10 bg-[#111111] p-6">
+              <p className="text-xs font-black uppercase tracking-widest text-[#ffc400]">{post.category}</p>
+              <h3 className="mt-3 text-lg font-black uppercase leading-tight transition group-hover:text-[#ffc400]">
+                <Link href={`/blog/${post.slug}`} className="focus-ring">{post.title}</Link>
+              </h3>
+              <p className="mt-3 text-sm leading-6 text-white/65">{post.excerpt}</p>
+              <Link href={`/blog/${post.slug}`} className="focus-ring mt-5 inline-flex items-center gap-2 text-xs font-black uppercase text-[#ffc400] hover:text-white">
+                LEGGI <ArrowRight size={15} />
+              </Link>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <section className="bg-[#0b0b0b] py-20">
         <div className="container-boch">
-          <div className="mb-10">
-            <p className="text-sm font-black uppercase tracking-[0.2em] text-[#ffc400]">Domande frequenti</p>
-            <h2 className="yellow-line mt-3 text-4xl font-black uppercase sm:text-5xl">FAQ</h2>
+          <div className="mb-10 flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
+            <div>
+              <p className="text-sm font-black uppercase tracking-[0.2em] text-[#ffc400]">Domande frequenti</p>
+              <h2 className="yellow-line mt-3 text-4xl font-black uppercase sm:text-5xl">FAQ</h2>
+            </div>
+            <Link href="/faq" className="focus-ring inline-flex items-center gap-2 text-sm font-black text-[#ffc400] hover:text-white">
+              TUTTE LE DOMANDE <ArrowRight size={17} />
+            </Link>
           </div>
           <FAQ />
           <p className="mt-6 text-sm text-white/60">

@@ -42,6 +42,8 @@ Valori richiesti in `.env.local`:
 - `lib/services.ts` — servizi e contenuto delle pagine `/servizi/[slug]`
 - `lib/materialDetails.ts` — contenuto delle pagine `/materiali/[slug]`
 - `lib/areas.ts` — aree servite, usate da `/zona-di-ritiro` e Footer
+- `lib/faqs.ts` — FAQ globali raggruppate per argomento
+- `lib/blog.ts` — 5 articoli statici (nessun CMS) usati da `/blog` e `/blog/[slug]`
 - `lib/gtm.ts` + `components/GoogleTagManager.tsx` — installazione GTM
 - `components/Breadcrumbs.tsx` — breadcrumb visivo e JSON-LD BreadcrumbList
 
@@ -56,6 +58,13 @@ Valori richiesti in `.env.local`:
   - `/servizi/recupero-selezione-metalli`
   - `/servizi/acquisto-rottami-metallici`
 - `/materiali` + 6 schede materiale (`/materiali/[slug]`)
+- `/faq` — domande frequenti con FAQPage JSON-LD
+- `/blog` + 5 articoli statici:
+  - `/blog/preparare-rottami-per-il-ritiro`
+  - `/blog/riconoscere-i-metalli-da-recuperare`
+  - `/blog/rottami-in-azienda-officine-e-cantieri`
+  - `/blog/recupero-metalli-e-economia-circolare`
+  - `/blog/vendere-rottami-in-piemonte`
 - `/aziende`, `/zona-di-ritiro`, `/contatti`, `/privacy`, `/cookie-policy`
 - `/sitemap.xml`, `/robots.txt`, `/manifest.webmanifest`
 

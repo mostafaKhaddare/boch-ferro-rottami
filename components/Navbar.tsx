@@ -3,7 +3,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Menu, Phone, X } from "lucide-react";
+import { business, formatDisplayNumber, getWhatsAppUrl, hasWhatsApp } from "@/lib/constants";
 
 const links = [
   ["Home", "/"],
@@ -11,6 +12,8 @@ const links = [
   ["Materiali", "/materiali"],
   ["Per Aziende", "/aziende"],
   ["Zona di Ritiro", "/zona-di-ritiro"],
+  ["FAQ", "/faq"],
+  ["Blog", "/blog"],
   ["Contatti", "/contatti"]
 ] as const;
 
@@ -31,24 +34,40 @@ export default function Navbar() {
           />
         </Link>
 
-        <nav className="hidden items-center gap-6 lg:flex" aria-label="Navigazione principale">
+        <nav className="hidden items-center gap-3 lg:flex xl:gap-5" aria-label="Navigazione principale">
           {links.map(([label, href]) => (
             <Link
               key={href}
               href={href}
-              className="focus-ring text-sm font-bold uppercase tracking-wide text-white/80 transition hover:text-[#ffc400]"
+              className="focus-ring text-xs font-bold uppercase tracking-wide text-white/80 transition hover:text-[#ffc400] xl:text-sm"
             >
               {label}
             </Link>
           ))}
         </nav>
 
-        <Link
-          href="/contatti"
-          className="focus-ring hidden bg-[#ffc400] px-5 py-3 text-sm font-black text-black transition hover:bg-white lg:block"
-        >
-          RICHIEDI UN PREVENTIVO
-        </Link>
+        {hasWhatsApp() ? (
+          <a
+            href={getWhatsAppUrl("Buongiorno, vorrei informazioni su ritiro e recupero rottami metallici.")}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Chiama ora ${formatDisplayNumber(business.whatsapp)} su WhatsApp`}
+            className="focus-ring hidden bg-[#ffc400] px-5 py-2.5 text-black transition hover:bg-white lg:flex lg:items-center lg:gap-3"
+          >
+            <Phone size={18} aria-hidden="true" />
+            <span className="leading-tight">
+              <span className="block text-sm font-black uppercase">CHIAMA ORA</span>
+              <span className="block text-xs font-bold">{formatDisplayNumber(business.whatsapp)}</span>
+            </span>
+          </a>
+        ) : (
+          <Link
+            href="/contatti"
+            className="focus-ring hidden bg-[#ffc400] px-5 py-3 text-sm font-black text-black transition hover:bg-white lg:block"
+          >
+            RICHIEDI UN PREVENTIVO
+          </Link>
+        )}
 
         <button
           type="button"

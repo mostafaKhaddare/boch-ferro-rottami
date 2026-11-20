@@ -104,6 +104,20 @@ export function getPhoneUrl() {
   return `tel:${number}`;
 }
 
+/** Numero formattato per la visualizzazione nei pulsanti di contatto. */
+export function formatDisplayNumber(raw: string) {
+  const digits = raw.replace(/\D/g, "");
+  if (!digits) return "";
+  if (digits.startsWith("39") && digits.length > 9) {
+    const rest = digits.slice(2);
+    return `+39 ${rest.slice(0, 3)} ${rest.slice(3, 6)} ${rest.slice(6)}`.trim();
+  }
+  if (digits.length === 10) {
+    return `${digits.slice(0, 3)} ${digits.slice(3, 6)} ${digits.slice(6)}`;
+  }
+  return raw.trim();
+}
+
 /** I pulsanti di contatto vengono mostrati solo con numeri reali configurati. */
 export function hasWhatsApp() {
   return getWhatsAppUrl() !== "#";
