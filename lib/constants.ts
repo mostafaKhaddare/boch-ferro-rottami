@@ -1,5 +1,16 @@
 import { serviceAreas } from "./areas";
 
+const configuredSiteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "").trim();
+/**
+ * Il dominio proprietario è sempre quello usato per canonical, sitemap, robots e JSON-LD.
+ * Un vecchio valore `*.vercel.app` rimasto nelle variabili di deploy non può quindi
+ * riportare l'host precedente nei file pubblicati.
+ */
+const siteUrl =
+  !configuredSiteUrl || /vercel\.app/i.test(configuredSiteUrl)
+    ? "https://www.bochferro.it"
+    : configuredSiteUrl.replace(/\/$/, "");
+
 export const business = {
   name: "BOCH FERRO ROTTAMI",
   tagline: "Recupero e commercio di rottami metallici",
@@ -8,7 +19,7 @@ export const business = {
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "",
   phone: process.env.NEXT_PUBLIC_PHONE_NUMBER ?? "",
   email: process.env.NEXT_PUBLIC_EMAIL ?? "",
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bochferro.it",
+  siteUrl,
   legalName: process.env.NEXT_PUBLIC_LEGAL_NAME ?? "",
   address: process.env.NEXT_PUBLIC_BUSINESS_ADDRESS ?? "",
   city: process.env.NEXT_PUBLIC_BUSINESS_CITY ?? "",
