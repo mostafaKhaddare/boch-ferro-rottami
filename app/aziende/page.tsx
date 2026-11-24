@@ -2,13 +2,15 @@
 import Link from "next/link";
 import { ArrowRight, Check, Factory } from "lucide-react";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Per Aziende",
+export const metadata: Metadata = pageMeta({
+  title: "Rottami Metallici per Aziende e Officine | BOCH FERRO",
   description:
     "Soluzioni per aziende, officine e attività produttive che necessitano di gestire rottami metallici ferrosi e non ferrosi.",
-  alternates: { canonical: "/aziende" }
-};
+  path: "/aziende",
+  imageAlt: "Ritiro rottami per aziende e officine"
+});
 
 const points = [
   "Soluzioni da concordare in base al materiale",

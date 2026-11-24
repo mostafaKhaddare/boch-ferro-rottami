@@ -76,7 +76,7 @@ export async function POST(request: Request) {
 
   if (!to || !smtpUser || !smtpPass) {
     return NextResponse.json(
-      { error: "Email non configurata. Imposta SMTP_USER, SMTP_PASS e CONTACT_TO_EMAIL nel server." },
+      { error: "Invio non disponibile al momento. Puoi contattarci tramite i canali indicati nella pagina Contatti." },
       { status: 503 }
     );
   }

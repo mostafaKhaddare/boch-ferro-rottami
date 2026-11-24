@@ -6,23 +6,15 @@ import Services from "@/components/Services";
 import HowItWorks from "@/components/HowItWorks";
 import { business } from "@/lib/constants";
 import { services } from "@/lib/services";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Servizi di Recupero Rottami Metallici",
+export const metadata: Metadata = pageMeta({
+  title: "Servizi di Recupero Rottami Metallici | BOCH FERRO ROTTAMI",
   description:
     "Servizi di recupero, ritiro e acquisto di rottami ferrosi e metalli non ferrosi per aziende, privati, cantieri e attività agricole in Piemonte.",
-  alternates: { canonical: "/servizi" },
-  openGraph: {
-    title: "Servizi di Recupero Rottami Metallici | BOCH FERRO ROTTAMI",
-    description:
-      "Scopri i servizi di recupero, ritiro e valorizzazione dei metalli per aziende e privati.",
-    url: "/servizi",
-    locale: "it_IT",
-    type: "website",
-    siteName: business.name,
-    images: [{ url: "/images/servizi/ritiro-rottami.jpg", alt: "Servizi di recupero rottami metallici" }]
-  }
-};
+  path: "/servizi",
+  imageAlt: "Servizi di recupero rottami metallici"
+});
 
 export default function ServiziPage() {
   return (

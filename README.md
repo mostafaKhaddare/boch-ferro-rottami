@@ -27,10 +27,12 @@ Valori richiesti in `.env.local`:
 
 | Variabile | Uso |
 | --- | --- |
-| `NEXT_PUBLIC_SITE_URL` | URL pubblico: canonical, sitemap, JSON-LD, Open Graph |
-| `NEXT_PUBLIC_PHONE_NUMBER` | Numero reale per pulsante chiamata; se contiene `X` il pulsante non viene mostrato |
-| `NEXT_PUBLIC_WHATSAPP_NUMBER` | Numero reale per WhatsApp; se contiene `X` il pulsante non viene mostrato |
+| `NEXT_PUBLIC_SITE_URL` | URL pubblico (`https://www.bochferro.it`): canonical, sitemap, JSON-LD, Open Graph |
+| `NEXT_PUBLIC_PHONE_NUMBER` | Numero reale per il pulsante chiamata; deve avere 10 cifre nazionali o 12 con prefisso 39 |
+| `NEXT_PUBLIC_WHATSAPP_NUMBER` | Numero reale per WhatsApp; stesso formato del telefono |
 | `NEXT_PUBLIC_EMAIL` | Email pubblica mostrata nei contatti |
+| `NEXT_PUBLIC_GSC_VERIFICATION` | Token di verifica di Google Search Console per il nuovo dominio |
+| `NEXT_PUBLIC_LEGAL_NAME`, `NEXT_PUBLIC_BUSINESS_ADDRESS`, `NEXT_PUBLIC_BUSINESS_CITY`, `NEXT_PUBLIC_BUSINESS_POSTAL_CODE`, `NEXT_PUBLIC_BUSINESS_REGION`, `NEXT_PUBLIC_BUSINESS_VAT`, `NEXT_PUBLIC_BUSINESS_HOURS` | Dati societari verificati: compaiono nei contatti, nel footer e nei dati strutturati solo se compilati |
 | `CONTACT_TO_EMAIL` | Destinatario delle richieste del modulo |
 | `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, `SMTP_PASS` | Invio email del modulo (SMTP_PASS obbligatorio) |
 

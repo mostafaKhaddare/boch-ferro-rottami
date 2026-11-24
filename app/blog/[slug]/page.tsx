@@ -6,8 +6,9 @@ import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import FAQ from "@/components/FAQ";
 import { business } from "@/lib/constants";
-import { blogPosts, getBlogPost } from "@/lib/blog";
+import { BLOG_AUTHOR, BLOG_UPDATED_AT, blogPosts, getBlogPost } from "@/lib/blog";
 import { services } from "@/lib/services";
+import { pageMeta } from "@/lib/seo";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -20,26 +21,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const post = getBlogPost(slug);
   if (!post) return { title: "Articolo non trovato" };
 
-  return {
-    title: { absolute: post.metaTitle },
+  return pageMeta({
+    title: post.metaTitle,
     description: post.metaDescription,
-    alternates: { canonical: `/blog/${post.slug}` },
-    openGraph: {
-      title: post.metaTitle,
-      description: post.metaDescription,
-      url: `/blog/${post.slug}`,
-      locale: "it_IT",
-      type: "article",
-      siteName: business.name,
-      images: [{ url: post.image, alt: post.imageAlt }]
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: post.metaTitle,
-      description: post.metaDescription,
-      images: [post.image]
-    }
-  };
+    path: `/blog/${post.slug}`,
+    image: `/images/og/blog/${post.slug}.webp`,
+    imageAlt: post.imageAlt,
+    type: "article",
+    modifiedTime: BLOG_UPDATED_AT
+  });
 }
 
 export default async function BlogPostPage({ params }: PageProps) {
@@ -59,7 +49,22 @@ export default async function BlogPostPage({ params }: PageProps) {
     .map((postSlug) => getBlogPost(postSlug))
     .filter((item): item is NonNullable<typeof item> => Boolean(item));
 
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: post.faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: { "@type": "Answer", text: faq.a }
+    }))
+  };
+
   const siteUrl = business.siteUrl.replace(/\/$/, "");
+  const updatedLabel = new Date(BLOG_UPDATED_AT).toLocaleDateString("it-IT", {
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+  });
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -70,7 +75,8 @@ export default async function BlogPostPage({ params }: PageProps) {
     url: `${siteUrl}/blog/${post.slug}`,
     mainEntityOfPage: `${siteUrl}/blog/${post.slug}`,
     inLanguage: "it-IT",
-    author: { "@type": "Organization", name: business.name, url: business.siteUrl },
+    dateModified: BLOG_UPDATED_AT,
+    author: { "@type": "Organization", name: BLOG_AUTHOR, url: business.siteUrl },
     publisher: { "@type": "Organization", name: business.name, url: business.siteUrl }
   };
 
@@ -90,6 +96,9 @@ export default async function BlogPostPage({ params }: PageProps) {
             <ArrowLeft size={17} /> TORNA AL BLOG
           </Link>
           <p className="mt-10 text-sm font-black uppercase tracking-[0.2em] text-[#ffc400]">{post.category}</p>
+          <p className="mt-4 text-sm text-white/60">
+            Di <strong className="font-bold text-white/80">{BLOG_AUTHOR}</strong> · Aggiornato il {updatedLabel}
+          </p>
           <h1 className="yellow-line mt-3 max-w-4xl text-4xl font-black uppercase leading-tight sm:text-6xl">
             {post.title}
           </h1>
@@ -222,6 +231,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       </article>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
     </>
   );
 }

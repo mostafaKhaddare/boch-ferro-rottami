@@ -3,12 +3,15 @@ import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { business } from "@/lib/constants";
 import { GTM_ID } from "@/lib/gtm";
+import { pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Cookie Policy",
-  description:
-    "Informazioni sui cookie e sugli strumenti di misurazione utilizzati dal sito di BOCH FERRO ROTTAMI tramite Google Tag Manager.",
-  alternates: { canonical: "/cookie-policy" },
+  ...pageMeta({
+    title: "Cookie Policy | BOCH FERRO ROTTAMI",
+    description:
+      "Informazioni sui cookie e sugli strumenti di misurazione utilizzati dal sito di BOCH FERRO ROTTAMI tramite Google Tag Manager.",
+    path: "/cookie-policy"
+  }),
   robots: { index: true, follow: true }
 };
 

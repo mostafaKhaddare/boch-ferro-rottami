@@ -2,12 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { business } from "@/lib/constants";
+import { pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy",
-  description:
-    "Informativa sul trattamento dei dati personali per il sito di BOCH FERRO ROTTAMI: dati raccolti tramite modulo di contatto e strumenti di misurazione.",
-  alternates: { canonical: "/privacy" },
+  ...pageMeta({
+    title: "Privacy Policy | BOCH FERRO ROTTAMI",
+    description:
+      "Informativa sul trattamento dei dati personali per il sito di BOCH FERRO ROTTAMI: dati raccolti tramite modulo di contatto e strumenti di misurazione.",
+    path: "/privacy"
+  }),
   robots: { index: true, follow: true }
 };
 
@@ -49,7 +52,7 @@ const sections = [
     title: "Destinatari dei dati",
     body: (
       <p>
-        Le informazioni del modulo vengono inviate all&apos;indirizzo email configurato per la gestione delle richieste, tramite un servizio SMTP. Il sito utilizza Google Tag Manager per caricare eventuali strumenti di misurazione e pubblicità: tali strumenti sono gestiti tramite il container GTM e possono trattare dati secondo le rispettive informative.
+        Le informazioni del modulo vengono inviate all&apos;indirizzo email utilizzato per la gestione delle richieste, tramite un servizio SMTP. Il sito utilizza Google Tag Manager per caricare eventuali strumenti di misurazione e pubblicità: tali strumenti sono gestiti tramite il container GTM e possono trattare dati secondo le rispettive informative.
       </p>
     )
   },

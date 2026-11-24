@@ -1,6 +1,6 @@
 ﻿import type { Metadata } from "next";
 import "./globals.css";
-import { business, getWhatsAppUrl, hasWhatsApp } from "@/lib/constants";
+import { business, getPhoneNumber, getWhatsAppUrl, hasWhatsApp } from "@/lib/constants";
 import { GTM_ID } from "@/lib/gtm";
 import GoogleTagManager from "@/components/GoogleTagManager";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     shortcut: ["/favicon.ico"]
   },
   verification: {
-    google: "DpMjB0T5x_tUthToHe_m7h5C2fNmQtRigagMM8oQYi4"
+    google: process.env.NEXT_PUBLIC_GSC_VERIFICATION ?? "DpMjB0T5x_tUthToHe_m7h5C2fNmQtRigagMM8oQYi4"
   },
   alternates: { canonical: "/" },
   robots: { index: true, follow: true },
@@ -40,28 +40,45 @@ export const metadata: Metadata = {
     title: "BOCH FERRO ROTTAMI | Recupero e Commercio Rottami Metallici",
     description:
       "Recupero e commercio di rottami ferrosi e metalli non ferrosi per aziende e privati.",
-    images: [{ url: "/images/hero/boch-hero.webp", width: 1920, height: 1072, alt: "Recupero rottami metallici" }]
+    images: [{ url: "/images/og/default.webp", width: 1200, height: 630, alt: "Recupero rottami metallici" }]
   },
   twitter: {
     card: "summary_large_image",
     title: "BOCH FERRO ROTTAMI | Recupero e Commercio Rottami Metallici",
     description:
       "Recupero e commercio di rottami ferrosi e metalli non ferrosi per aziende e privati.",
-    images: ["/images/hero/boch-hero.webp"]
+    images: ["/images/og/default.webp"]
   }
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const siteUrl = business.siteUrl.replace(/\/$/, "");
+  const phoneNumber = getPhoneNumber();
+  const telephone = phoneNumber ? `+${phoneNumber}` : undefined;
+  const postalAddress = business.address
+    ? {
+        "@type": "PostalAddress",
+        streetAddress: business.address,
+        ...(business.postalCode ? { postalCode: business.postalCode } : {}),
+        ...(business.city ? { addressLocality: business.city } : {}),
+        ...(business.region ? { addressRegion: business.region } : {}),
+        addressCountry: "IT"
+      }
+    : undefined;
 
   const orgJsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: business.name,
+    name: business.legalName || business.name,
+    alternateName: business.legalName ? business.name : undefined,
     url: business.siteUrl,
     description: business.description,
     logo: `${siteUrl}/images/boch-logo.png`,
     ...(business.email ? { email: business.email } : {}),
+    ...(telephone ? { telephone } : {}),
+    ...(postalAddress ? { address: postalAddress } : {}),
+    ...(business.vat ? { vatID: business.vat } : {}),
+    ...(business.hours ? { openingHours: business.hours } : {}),
     areaServed: { "@type": "AdministrativeArea", name: business.areaServedName }
   };
 
@@ -72,8 +89,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     name: business.name,
     url: business.siteUrl,
     description: business.description,
-    image: `${siteUrl}/images/hero/boch-hero.webp`,
+    image: `${siteUrl}/images/og/default.webp`,
     ...(business.email ? { email: business.email } : {}),
+    ...(telephone ? { telephone } : {}),
+    ...(postalAddress ? { address: postalAddress } : {}),
+    ...(business.hours ? { openingHours: business.hours } : {}),
     areaServed: business.areas.map((name) => ({ "@type": "City", name }))
   };
 

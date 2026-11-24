@@ -90,7 +90,7 @@ export const services: Service[] = [
       "Ritiro di rottami ferrosi e non ferrosi per aziende, officine, carpenterie e cantieri in Piemonte. Descrivici il materiale e richiedi informazioni.",
     shortDescription:
       "Raccogliamo rottami metallici presso aziende, officine e cantieri, organizzando il servizio in base al materiale e alle esigenze dell'attività.",
-    image: "/images/servizi/ritiro-rottami-mitalici.jpg",
+    image: "/images/servizi/ritiro-rottami-metallici.jpg",
     imageAlt: "Raccolta di rottami metallici presso un'attività industriale",
     icon: "factory",
     intro: [
@@ -143,7 +143,7 @@ export const services: Service[] = [
       "Ritiro di rottami metallici da abitazioni, cascine, cortili e aziende agricole nelle aree servite in Piemonte. Richiedi informazioni sul materiale.",
     shortDescription:
       "Organizziamo il ritiro di rottami metallici da abitazioni, cascine, cortili e aziende agricole: vecchio ferro, attrezzi e materiale dismesso.",
-    image: "/images/servizi/Ritiro-rottami-abitazioni-aziende-agricole.jpg",
+    image: "/images/servizi/ritiro-rottami-abitazioni-aziende-agricole.jpg",
     imageAlt: "Rottami metallici raccolti presso un'abitazione rurale e un'azienda agricola",
     icon: "truck",
     intro: [
@@ -249,7 +249,7 @@ export const services: Service[] = [
       "Selezione e separazione dei rottami metallici: ferro, acciaio, rame, ottone, alluminio e cavi. Scopri come BOCH gestisce il recupero dei metalli.",
     shortDescription:
       "Selezioniamo e separiamo i rottami metallici, distinguendo materiali ferrosi e non ferrosi per favorire il recupero e il riciclo delle risorse.",
-    image: "/images/servizi/recopero-rotami.jpg",
+    image: "/images/servizi/recupero-rottami.jpg",
     imageAlt: "Contenitori e mezzi per la selezione dei rottami metallici",
     icon: "recycle",
     intro: [

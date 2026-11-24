@@ -1,5 +1,9 @@
 import type { FaqItem } from "./faqs";
 
+/** Data di ultima revisione dei contenuti, mostrata sugli articoli e nei metadati. */
+export const BLOG_UPDATED_AT = "2026-11-23";
+export const BLOG_AUTHOR = "BOCH FERRO ROTTAMI";
+
 export type BlogSection = {
   heading: string;
   paragraphs?: string[];
@@ -110,7 +114,7 @@ export const blogPosts: BlogPost[] = [
       "Ogni ritiro viene verificato in base al materiale e alla zona.",
     ],
     faqs: [
-      { q: "Devo smontare i oggetti prima del ritiro?", a: "Non sempre. Dipende dal tipo di materiale e dagli spazi disponibili. Indica nella richiesta come sono sistemati gli oggetti e verifichiamo insieme come organizzare il carico." },
+      { q: "Devo smontare gli oggetti prima del ritiro?", a: "Non sempre. Dipende dal tipo di materiale e dagli spazi disponibili. Indica nella richiesta come sono sistemati gli oggetti e verifichiamo insieme come organizzare il carico." },
       { q: "Posso chiedere il ritiro anche se il materiale è misto?", a: "Sì. Descrivici le tipologie presenti: la separazione preventiva aiuta, ma non è sempre possibile e viene valutata caso per caso." },
       { q: "Cosa devo indicare nel modulo di contatto?", a: "Comune, tipo di materiale, quantità indicativa e un breve messaggio sulle condizioni di accesso sono le informazioni più utili per una prima verifica." },
     ],
@@ -127,7 +131,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Colore, peso e utilizzo aiutano a riconoscere i metalli più comuni. Una guida pratica per chi vuole descrivere meglio il proprio materiale.",
     category: "Materiali",
-    image: "/images/servizi/recopero-rotami.jpg",
+    image: "/images/servizi/recupero-rottami.jpg",
     imageAlt: "Materiali metallici selezionati per il recupero",
     intro: [
       "Non è necessario essere un esperto per distinguere i principali metalli presenti nei rottami. Colore, peso e tipo di oggetto forniscono indizi utili, soprattutto quando si prepara una richiesta di ritiro o si vuole capire come viene gestito il materiale.",
@@ -197,7 +201,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Dallo stoccaggio degli scarti alle informazioni da preparare per il ritiro: una guida per attività produttive e cantieri.",
     category: "Per aziende",
-    image: "/images/servizi/ritiro-rottami-mitalici.jpg",
+    image: "/images/servizi/ritiro-rottami-metallici.jpg",
     imageAlt: "Raccolta di rottami metallici presso un'attività produttiva",
     intro: [
       "Officine meccaniche, fabbri, carpenterie, serramentisti, elettricisti, idraulici e imprese edili producono ogni giorno scarti metallici diversi. Ritagli di lamiera, profili, tubi, cavi e componenti dismessi occupano spazio e vanno gestiti con ordine.",

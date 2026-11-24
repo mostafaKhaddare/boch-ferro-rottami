@@ -10,6 +10,14 @@ export default function Footer() {
           <Image src="/images/boch-logo.png" alt="BOCH FERRO ROTTAMI" width={180} height={110} className="h-16 w-auto object-contain" />
           <p className="mt-5 max-w-sm text-sm leading-6 text-white/60">{business.tagline}</p>
           <p className="mt-3 text-xs text-white/60">Recupero e commercio di rottami ferrosi e metalli non ferrosi.</p>
+          {(business.legalName || business.address || business.vat || business.hours) ? (
+            <address className="mt-5 space-y-1 text-xs not-italic leading-5 text-white/60">
+              {business.legalName ? <p className="font-bold text-white/80">{business.legalName}</p> : null}
+              {business.address ? <p>{business.address}</p> : null}
+              {business.vat ? <p>P.IVA {business.vat}</p> : null}
+              {business.hours ? <p>{business.hours}</p> : null}
+            </address>
+          ) : null}
         </div>
 
         <div>

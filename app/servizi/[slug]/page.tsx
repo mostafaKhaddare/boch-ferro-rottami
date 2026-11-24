@@ -6,6 +6,7 @@ import { ArrowRight, Check, ChevronRight, MapPin } from "lucide-react";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { business } from "@/lib/constants";
 import { getService, services } from "@/lib/services";
+import { pageMeta } from "@/lib/seo";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -18,26 +19,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const service = getService(slug);
   if (!service) return { title: "Servizio non trovato" };
 
-  return {
-    title: { absolute: service.metaTitle },
+  return pageMeta({
+    title: service.metaTitle,
     description: service.metaDescription,
-    alternates: { canonical: `/servizi/${service.slug}` },
-    openGraph: {
-      title: service.metaTitle,
-      description: service.metaDescription,
-      url: `/servizi/${service.slug}`,
-      locale: "it_IT",
-      type: "website",
-      siteName: business.name,
-      images: [{ url: service.image, alt: service.imageAlt }]
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: service.metaTitle,
-      description: service.metaDescription,
-      images: [service.image]
-    }
-  };
+    path: `/servizi/${service.slug}`,
+    image: `/images/og/servizi/${service.slug}.webp`,
+    imageAlt: service.imageAlt
+  });
 }
 
 export default async function ServiceDetailPage({ params }: PageProps) {
@@ -48,6 +36,16 @@ export default async function ServiceDetailPage({ params }: PageProps) {
   const related = service.related
     .map((relatedSlug) => getService(relatedSlug))
     .filter((item): item is NonNullable<typeof item> => Boolean(item));
+
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: service.faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: { "@type": "Answer", text: faq.a }
+    }))
+  };
 
   const serviceJsonLd = {
     "@context": "https://schema.org",
@@ -119,12 +117,12 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             </div>
           </div>
           <aside className="h-fit border border-white/10 bg-[#111111] p-7">
-            <p className="text-xs font-black uppercase tracking-widest text-[#ffc400]">In breve</p>
+            <p className="text-xs font-black uppercase tracking-widest text-[#ffc400]">Materiali principali</p>
             <ul className="mt-5 grid gap-3 text-sm leading-6 text-white/70">
-              {service.benefits.slice(0, 3).map((benefit) => (
-                <li key={benefit} className="flex gap-3">
+              {service.materials.slice(0, 3).map((material) => (
+                <li key={material} className="flex gap-3">
                   <Check className="mt-1 shrink-0 text-[#ffc400]" size={17} aria-hidden="true" />
-                  {benefit}
+                  {material}
                 </li>
               ))}
             </ul>
@@ -267,6 +265,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
       </section>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
     </>
   );
 }

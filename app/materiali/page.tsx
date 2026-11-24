@@ -3,13 +3,15 @@ import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import MaterialCard from "@/components/MaterialCard";
 import { business } from "@/lib/constants";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Materiali Metallici",
+export const metadata: Metadata = pageMeta({
+  title: "Materiali Metallici | BOCH FERRO ROTTAMI",
   description:
     "Ferro, acciaio, rame, ottone, alluminio e cavi: materiali metallici trattati per recupero e valorizzazione.",
-  alternates: { canonical: "/materiali" }
-};
+  path: "/materiali",
+  imageAlt: "Materiali metallici trattati"
+});
 
 export default function MaterialiPage() {
   return (

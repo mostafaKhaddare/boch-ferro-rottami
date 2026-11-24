@@ -52,7 +52,7 @@ export default function Services({ items }: { items: readonly Service[] }) {
                   href={`/servizi/${service.slug}`}
                   className="focus-ring inline-flex items-center gap-2 text-sm font-black uppercase tracking-wide text-[#ffc400] transition hover:text-white"
                 >
-                  Scopri il servizio <ArrowRight size={16} />
+                  Scopri {service.title.toLowerCase()} <ArrowRight size={16} />
                 </Link>
                 <Link
                   href={`/contatti?servizio=${service.slug}`}

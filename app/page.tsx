@@ -11,23 +11,15 @@ import FAQ from "@/components/FAQ";
 import { business, heroSlides } from "@/lib/constants";
 import { blogPosts } from "@/lib/blog";
 import { services } from "@/lib/services";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "BOCH FERRO ROTTAMI | Recupero e Commercio Rottami Metallici",
   description:
     "BOCH FERRO ROTTAMI: ritiro, recupero, selezione e acquisto di rottami ferrosi e metalli non ferrosi per aziende e privati in Piemonte.",
-  alternates: { canonical: "/" },
-  openGraph: {
-    title: "BOCH FERRO ROTTAMI | Recupero e Commercio Rottami Metallici",
-    description:
-      "Ritiro, recupero e commercio di rottami metallici per aziende e privati in Piemonte.",
-    url: "/",
-    locale: "it_IT",
-    type: "website",
-    siteName: business.name,
-    images: [{ url: "/images/hero/boch-hero.webp", alt: "Recupero e commercio rottami metallici" }]
-  }
-};
+  path: "/",
+  imageAlt: "Recupero e commercio rottami metallici"
+});
 
 const quickLinks = [
   { label: "Ritiro rottami per privati", href: "/servizi/ritiro-rottami-privati" },
@@ -147,7 +139,7 @@ export default function HomePage() {
               </h3>
               <p className="mt-3 text-sm leading-6 text-white/65">{post.excerpt}</p>
               <Link href={`/blog/${post.slug}`} className="focus-ring mt-5 inline-flex items-center gap-2 text-xs font-black uppercase text-[#ffc400] hover:text-white">
-                LEGGI <ArrowRight size={15} />
+                Leggi: {post.title} <ArrowRight size={15} />
               </Link>
             </article>
           ))}

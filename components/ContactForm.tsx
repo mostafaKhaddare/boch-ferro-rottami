@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
-import { LoaderCircle, Send, Upload } from "lucide-react";
+import { Camera, LoaderCircle, Send } from "lucide-react";
 import { business, getWhatsAppUrl, hasWhatsApp } from "@/lib/constants";
 import { serviceLabels } from "@/lib/serviceLabels";
 import { pushDataLayer } from "@/lib/gtm";
@@ -11,16 +11,18 @@ type Status = "idle" | "submitting" | "success" | "error";
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
-  const [fileName, setFileName] = useState("");
   const [serviceSlug, setServiceSlug] = useState("");
   const [requestedMaterial, setRequestedMaterial] = useState("");
+  const [requestedComune, setRequestedComune] = useState("");
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const slug = params.get("servizio") ?? "";
     const material = params.get("materiale") ?? "";
+    const comune = params.get("comune") ?? "";
     if (serviceLabels[slug]) setServiceSlug(slug);
     if (material && material.length <= 120) setRequestedMaterial(material);
+    if (comune && comune.length <= 120) setRequestedComune(comune);
   }, []);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -59,7 +61,6 @@ export default function ContactForm() {
         city: payload.comune
       });
       form.reset();
-      setFileName("");
     } catch (err) {
       setStatus("error");
       setMessage(err instanceof Error ? err.message : "Invio non riuscito.");
@@ -96,7 +97,7 @@ export default function ContactForm() {
         </label>
         <label className="text-sm font-bold">
           Comune *
-          <input required name="comune" autoComplete="address-level2" maxLength={120} className="focus-ring mt-2 w-full border border-white/15 bg-black px-4 py-3 outline-none" />
+          <input required name="comune" autoComplete="address-level2" maxLength={120} defaultValue={requestedComune} className="focus-ring mt-2 w-full border border-white/15 bg-black px-4 py-3 outline-none" />
         </label>
         <label className="text-sm font-bold">
           Tipo di materiale *
@@ -118,21 +119,19 @@ export default function ContactForm() {
           Non compilare
           <input name="website" tabIndex={-1} autoComplete="off" />
         </label>
-        <label className="md:col-span-2">
-          <span className="text-sm font-bold">Foto del materiale (opzionale)</span>
-          <span className="mt-2 flex cursor-pointer items-center gap-3 border border-dashed border-white/20 bg-black px-4 py-4 text-sm text-white/60 hover:border-[#ffc400]">
-            <Upload size={18} aria-hidden="true" />
-            {fileName || "Scegli una foto"}
-            <input
-              type="file"
-              accept="image/*"
-              name="foto"
-              className="sr-only"
-              onChange={(e) => setFileName(e.target.files?.[0]?.name ?? "")}
-            />
-          </span>
-          <span className="mt-2 block text-xs text-white/60">L&apos;allegato non viene inviato via email con questa integrazione; usa WhatsApp per inviare foto.</span>
-        </label>
+        {hasWhatsApp() ? (
+          <div className="md:col-span-2">
+            <a
+              href={getWhatsAppUrl("Buongiorno, vorrei inviarvi alcune foto del materiale da ritirare.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="focus-ring flex min-h-14 items-center gap-3 border border-dashed border-[#ffc400]/50 bg-black/40 px-4 py-3 text-sm font-bold text-white/80 transition hover:border-[#ffc400] hover:text-white"
+            >
+              <Camera size={20} className="shrink-0 text-[#ffc400]" aria-hidden="true" />
+              Hai delle foto del materiale? Inviale su WhatsApp
+            </a>
+          </div>
+        ) : null}
       </div>
 
       {status === "success" ? (

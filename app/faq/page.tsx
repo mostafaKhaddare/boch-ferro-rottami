@@ -5,23 +5,15 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import FAQ from "@/components/FAQ";
 import { business } from "@/lib/constants";
 import { allFaqs, faqGroups } from "@/lib/faqs";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "FAQ - Domande Frequenti su Rottami e Ritiri",
+export const metadata: Metadata = pageMeta({
+  title: "FAQ su Ritiro e Recupero Rottami | BOCH FERRO",
   description:
     "Risposte alle domande frequenti su ritiro rottami, materiali metallici, recupero, zone servite e richiesta di informazioni per aziende e privati.",
-  alternates: { canonical: "/faq" },
-  openGraph: {
-    title: "FAQ - Domande Frequenti | BOCH FERRO ROTTAMI",
-    description:
-      "Tutte le risposte utili su servizi, materiali, ritiri e area di servizio.",
-    url: "/faq",
-    locale: "it_IT",
-    type: "website",
-    siteName: business.name,
-    images: [{ url: "/images/hero/boch-hero.webp", alt: "Domande frequenti sui rottami metallici" }]
-  }
-};
+  path: "/faq",
+  imageAlt: "Domande frequenti sui rottami metallici"
+});
 
 export default function FaqPage() {
   const jsonLd = {
@@ -42,7 +34,7 @@ export default function FaqPage() {
       <section className="metal-noise border-b border-white/10">
         <div className="container-boch py-14 sm:py-20">
           <p className="text-sm font-black uppercase tracking-[0.2em] text-[#ffc400]">Informazioni utili</p>
-          <h1 className="yellow-line mt-3 text-5xl font-black uppercase sm:text-7xl">FAQ</h1>
+          <h1 className="yellow-line mt-3 text-5xl font-black uppercase sm:text-7xl">Domande frequenti su ritiro e recupero rottami</h1>
           <p className="mt-7 max-w-3xl text-lg leading-8 text-white/70">
             Domande frequenti sui servizi di {business.name}: ritiro e recupero dei rottami, materiali trattati, zone servite e modalità di contatto.
           </p>

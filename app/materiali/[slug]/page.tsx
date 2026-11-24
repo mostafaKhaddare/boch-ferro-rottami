@@ -6,6 +6,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import { business } from "@/lib/constants";
 import { materialDetails } from "@/lib/materialDetails";
 import { services } from "@/lib/services";
+import { pageMeta } from "@/lib/seo";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -18,23 +19,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const material = business.materials.find((item) => item.slug === slug);
   if (!material) return { title: "Materiale non trovato" };
 
-  const title = `Recupero ${material.name} | Ritiro e Acquisto Rottami`;
+  const title = `Recupero ${material.name} | BOCH FERRO`;
   const description = `${material.description} Ritiro, recupero e commercio di ${material.name.toLowerCase()} in Piemonte con BOCH FERRO ROTTAMI.`;
 
-  return {
+  return pageMeta({
     title,
     description,
-    alternates: { canonical: `/materiali/${material.slug}` },
-    openGraph: {
-      title: `${title} | BOCH FERRO ROTTAMI`,
-      description,
-      url: `/materiali/${material.slug}`,
-      locale: "it_IT",
-      type: "website",
-      siteName: business.name,
-      images: [{ url: "/images/hero/boch-hero.webp", alt: `Recupero di ${material.name.toLowerCase()}` }]
-    }
-  };
+    path: `/materiali/${material.slug}`,
+    image: `/images/og/materiali/${material.slug}.webp`,
+    imageAlt: `Recupero di ${material.name.toLowerCase()}`
+  });
 }
 
 export default async function MaterialDetailPage({ params }: PageProps) {
@@ -46,6 +40,16 @@ export default async function MaterialDetailPage({ params }: PageProps) {
   const relatedServices = detail.relatedServices
     .map((serviceSlug) => services.find((service) => service.slug === serviceSlug))
     .filter((item): item is NonNullable<typeof item> => Boolean(item));
+
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: detail.faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: { "@type": "Answer", text: faq.a }
+    }))
+  };
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -171,6 +175,7 @@ export default async function MaterialDetailPage({ params }: PageProps) {
       </section>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
     </>
   );
 }

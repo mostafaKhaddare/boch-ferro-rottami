@@ -5,23 +5,15 @@ import { ArrowRight } from "lucide-react";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { business } from "@/lib/constants";
 import { blogPosts } from "@/lib/blog";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Blog - Guide su Rottami e Recupero Metalli",
+export const metadata: Metadata = pageMeta({
+  title: "Blog Guide su Rottami e Metalli | BOCH FERRO",
   description:
     "Guide pratiche su ritiro rottami, riconoscimento dei metalli, recupero e gestione degli scarti per aziende e privati in Piemonte.",
-  alternates: { canonical: "/blog" },
-  openGraph: {
-    title: "Blog - Guide su Rottami e Recupero Metalli | BOCH FERRO ROTTAMI",
-    description:
-      "Cinque guide pratiche su rottami metallici, recupero e valorizzazione dei materiali.",
-    url: "/blog",
-    locale: "it_IT",
-    type: "website",
-    siteName: business.name,
-    images: [{ url: "/images/hero/boch-hero.webp", alt: "Blog BOCH FERRO ROTTAMI" }]
-  }
-};
+  path: "/blog",
+  imageAlt: "Blog BOCH FERRO ROTTAMI"
+});
 
 export default function BlogPage() {
   const jsonLd = {
@@ -79,7 +71,7 @@ export default function BlogPage() {
                 </h2>
                 <p className="mt-3 flex-1 text-sm leading-6 text-white/65">{post.excerpt}</p>
                 <Link href={`/blog/${post.slug}`} className="focus-ring mt-6 inline-flex items-center gap-2 text-sm font-black uppercase text-[#ffc400] hover:text-white">
-                  LEGGI L&apos;ARTICOLO <ArrowRight size={16} />
+                  Leggi: {post.title} <ArrowRight size={16} />
                 </Link>
               </div>
             </article>

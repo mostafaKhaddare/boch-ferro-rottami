@@ -5,23 +5,15 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import ServiceArea from "@/components/ServiceArea";
 import { serviceAreas } from "@/lib/areas";
 import { business } from "@/lib/constants";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Zona di Ritiro Rottami in Piemonte",
+export const metadata: Metadata = pageMeta({
+  title: "Ritiro Rottami ad Asti e Nizza Monferrato | BOCH FERRO",
   description:
     "Area di servizio per ritiro e recupero di rottami metallici: Asti, Nizza Monferrato, Canelli, Acqui Terme, Incisa Scapaccino, Calamandrana e Costigliole d'Asti.",
-  alternates: { canonical: "/zona-di-ritiro" },
-  openGraph: {
-    title: "Zona di Ritiro Rottami in Piemonte | BOCH FERRO ROTTAMI",
-    description:
-      "Scopri le aree servite per il ritiro di rottami metallici e recupero ferro in Piemonte.",
-    url: "/zona-di-ritiro",
-    locale: "it_IT",
-    type: "website",
-    siteName: business.name,
-    images: [{ url: "/images/hero/boch-hero.webp", alt: "Area di servizio per il ritiro rottami" }]
-  }
-};
+  path: "/zona-di-ritiro",
+  imageAlt: "Area di servizio per il ritiro rottami"
+});
 
 const faqs = [
   { q: "Ritirate rottami in tutte le zone del Piemonte?", a: "Operiamo principalmente nelle aree indicate in questa pagina e nei comuni limitrofi. Per una località diversa, indicacela nella richiesta: verifichiamo la disponibilità in base al materiale." },
@@ -31,6 +23,16 @@ const faqs = [
 ];
 
 export default function ZonaPage() {
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: { "@type": "Answer", text: faq.a }
+    }))
+  };
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -47,7 +49,7 @@ export default function ZonaPage() {
       <div>
         <section className="container-boch py-16 sm:py-24">
           <p className="text-sm font-black uppercase tracking-[0.2em] text-[#ffc400]">Servizio locale</p>
-          <h1 className="yellow-line mt-3 text-5xl font-black uppercase sm:text-7xl">ZONA DI SERVIZIO</h1>
+          <h1 className="yellow-line mt-3 text-5xl font-black uppercase sm:text-7xl">Ritiro rottami metallici ad Asti, Nizza Monferrato e dintorni</h1>
           <p className="mt-7 max-w-2xl text-lg leading-8 text-white/65">
             Operiamo principalmente in Piemonte, con particolare riferimento all&apos;area astigiana. Il servizio riguarda ritiro, recupero e commercio di rottami ferrosi e metalli non ferrosi per privati e aziende.
           </p>
@@ -95,12 +97,12 @@ export default function ZonaPage() {
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
               {[
-                ["Rottami metallici Asti", "/contatti"],
-                ["Recupero ferro Asti", "/materiali/ferro"],
-                ["Ritiro rottami Nizza Monferrato", "/servizi/ritiro-rottami-privati"],
-                ["Recupero metalli Nizza Monferrato", "/servizi/recupero-selezione-metalli"],
-                ["Ritiro ferro Acqui Terme", "/servizi/ritiro-rottami-privati"],
-                ["Rottami metallici Canelli", "/servizi/ritiro-rottami-aziende-agricole"]
+                ["Richiedi un ritiro ad Asti", "/contatti?comune=Asti"],
+                ["Richiedi recupero ferro ad Asti", "/contatti?comune=Asti&materiale=Ferro"],
+                ["Ritiro rottami a Nizza Monferrato", "/contatti?comune=Nizza%20Monferrato"],
+                ["Recupero e selezione metalli", "/servizi/recupero-selezione-metalli"],
+                ["Ritiro rottami per privati", "/servizi/ritiro-rottami-privati"],
+                ["Ritiro per aziende agricole", "/servizi/ritiro-rottami-aziende-agricole"]
               ].map(([label, href]) => (
                 <Link key={label} href={href} className="focus-ring flex items-center justify-between gap-3 border border-white/10 bg-[#111111] p-5 text-sm font-black uppercase transition hover:border-[#ffc400] hover:text-[#ffc400]">
                   {label} <ArrowRight size={16} className="shrink-0 text-[#ffc400]" aria-hidden="true" />
@@ -128,6 +130,7 @@ export default function ZonaPage() {
         </section>
       </div>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
     </>
   );
 }

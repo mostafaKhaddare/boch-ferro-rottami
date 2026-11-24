@@ -17,7 +17,7 @@ export const faqGroups: FaqGroup[] = [
     items: [
       { q: "Quali servizi di ritiro offrite?", a: "Organizziamo il ritiro di rottami metallici per privati, aziende e officine, cantieri e ristrutturazioni, cascine e aziende agricole. Ci occupiamo inoltre di recupero, selezione e acquisto di rottami ferrosi e metalli non ferrosi." },
       { q: "Come funziona una richiesta di ritiro?", a: "Il primo passo è descrivere il materiale: tipologia, quantità indicativa e comune. Verifichiamo la disponibilità nella nostra area e concordiamo insieme modalità e accesso al luogo del ritiro." },
-      { q: "Posso inviare una foto del materiale?", a: "Sì. Le fotografie aiutano a capire di cosa si tratta e come organizzare il carico. Puoi indicarlo nella richiesta oppure utilizzare WhatsApp, se il numero è configurato nella pagina contatti." },
+      { q: "Posso inviare una foto del materiale?", a: "Sì. Le fotografie aiutano a capire di cosa si tratta e come organizzare il carico. Puoi descrivere il materiale nel modulo di contatto oppure inviarci le foto direttamente su WhatsApp, usando il pulsante che trovi nella pagina contatti." },
       { q: "Organizzate ritiri ricorrenti per le aziende?", a: "Per attività con produzione regolare di rottami è possibile richiedere informazioni su ritiri organizzati nel tempo. Definiamo modalità e frequenza in base al materiale e alle esigenze dell'attività." },
       { q: "Ritirate materiale misto?", a: "Possiamo valutare materiale metallico misto. Descrivici le tipologie presenti e le condizioni: la separazione preventiva tra ferro e metalli non ferrosi aiuta comunque il recupero." }
     ],
@@ -65,7 +65,7 @@ export const faqGroups: FaqGroup[] = [
     items: [
       { q: "In quali zone operate?", a: "Operiamo principalmente in Piemonte, con riferimento ad Asti, Nizza Monferrato, Canelli, Acqui Terme, Incisa Scapaccino, Calamandrana e Costigliole d'Asti, oltre ai comuni limitrofi." },
       { q: "Il mio comune non è nell'elenco: posso chiedere un ritiro?", a: "Sì. Indica la località e una descrizione del materiale nella richiesta: verifichiamo la disponibilità in base al tipo di rottame e alla zona." },
-      { q: "Come posso contattarvi?", a: "Puoi usare il modulo nella pagina contatti, che invia la richiesta direttamente al nostro indirizzo email configurato. Nella stessa pagina trovi gli eventuali canali telefonici e WhatsApp configurati." },
+      { q: "Come posso contattarvi?", a: "Puoi usare il modulo nella pagina contatti oppure i canali indicati nella stessa pagina: telefono, WhatsApp e indirizzo email. Per una risposta rapida, include tipologia del materiale, comune e quantità indicativa." },
       { q: "Quanto tempo serve per una risposta?", a: "Non pubblichiamo tempi di risposta garantiti. Ti ricontatteremo appena possibile dopo aver ricevuto e verificato le informazioni inviate." },
       { q: "Pubblicate prezzi o tariffe?", a: "No. La gestione del materiale dipende da tipologia, quantità e condizioni: per questo preferiamo valutare ogni richiesta singolarmente." }
     ],

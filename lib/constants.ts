@@ -1,4 +1,4 @@
-﻿import { serviceAreas } from "./areas";
+import { serviceAreas } from "./areas";
 
 export const business = {
   name: "BOCH FERRO ROTTAMI",
@@ -8,7 +8,14 @@ export const business = {
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "",
   phone: process.env.NEXT_PUBLIC_PHONE_NUMBER ?? "",
   email: process.env.NEXT_PUBLIC_EMAIL ?? "",
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bochferrorottami.it",
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bochferro.it",
+  legalName: process.env.NEXT_PUBLIC_LEGAL_NAME ?? "",
+  address: process.env.NEXT_PUBLIC_BUSINESS_ADDRESS ?? "",
+  city: process.env.NEXT_PUBLIC_BUSINESS_CITY ?? "",
+  postalCode: process.env.NEXT_PUBLIC_BUSINESS_POSTAL_CODE ?? "",
+  region: process.env.NEXT_PUBLIC_BUSINESS_REGION ?? "",
+  vat: process.env.NEXT_PUBLIC_BUSINESS_VAT ?? "",
+  hours: process.env.NEXT_PUBLIC_BUSINESS_HOURS ?? "",
   areaServedName: "Piemonte",
   areas: serviceAreas.map((area) => area.name),
   materials: [
@@ -64,7 +71,7 @@ export const heroSlides = [
     ctaHref: "/servizi"
   },
   {
-    image: "/images/servizi/ritiro-rottami-mitalici.jpg",
+    image: "/images/servizi/ritiro-rottami-metallici.jpg",
     alt: "Ritiro di rottami metallici presso un'attività",
     eyebrow: "Ritiro e raccolta",
     title: "Ritiriamo i Tuoi Rottami Metallici",
@@ -74,7 +81,7 @@ export const heroSlides = [
     ctaHref: "/servizi/ritiro-rottami-privati"
   },
   {
-    image: "/images/servizi/recopero-rotami.jpg",
+    image: "/images/servizi/recupero-rottami.jpg",
     alt: "Selezione di materiali metallici per il recupero",
     eyebrow: "Recupero e selezione",
     title: "Ogni Metallo, al Giusto Recupero",
@@ -85,10 +92,34 @@ export const heroSlides = [
   }
 ] as const;
 
+/**
+ * Restituisce il numero in formato internazionale solo se è completo.
+ * Un numero italiano valido ha 10 cifre nazionali (3XX... o 0XX...),
+ * oppure 12 cifre con il prefisso 39. I segnaposto e i numeri troncati
+ * vengono scartati per evitare collegamenti a numeri sbagliati.
+ */
+function normalizeItalianNumber(raw: string) {
+  if (!raw || /X/i.test(raw)) return "";
+  const digits = raw.replace(/\D/g, "");
+  if (digits.startsWith("39")) {
+    return digits.length === 12 ? digits : "";
+  }
+  if (digits.length === 10 && /^[30]/.test(digits)) {
+    return `39${digits}`;
+  }
+  return "";
+}
+
+export function getWhatsAppNumber() {
+  return normalizeItalianNumber(business.whatsapp);
+}
+
+export function getPhoneNumber() {
+  return normalizeItalianNumber(business.phone);
+}
+
 export function getWhatsAppUrl(message?: string) {
-  const raw = business.whatsapp.trim();
-  if (!raw || /X/i.test(raw)) return "#";
-  const number = raw.replace(/\D/g, "");
+  const number = getWhatsAppNumber();
   if (!number) return "#";
   const text =
     message ??
@@ -97,32 +128,23 @@ export function getWhatsAppUrl(message?: string) {
 }
 
 export function getPhoneUrl() {
-  const raw = business.phone.trim();
-  if (!raw || /X/i.test(raw)) return "#";
-  const number = raw.replace(/[^\d+]/g, "");
-  if (!number) return "#";
-  return `tel:${number}`;
+  const number = getPhoneNumber();
+  return number ? `tel:+${number}` : "#";
 }
 
 /** Numero formattato per la visualizzazione nei pulsanti di contatto. */
 export function formatDisplayNumber(raw: string) {
-  const digits = raw.replace(/\D/g, "");
-  if (!digits) return "";
-  if (digits.startsWith("39") && digits.length > 9) {
-    const rest = digits.slice(2);
-    return `+39 ${rest.slice(0, 3)} ${rest.slice(3, 6)} ${rest.slice(6)}`.trim();
-  }
-  if (digits.length === 10) {
-    return `${digits.slice(0, 3)} ${digits.slice(3, 6)} ${digits.slice(6)}`;
-  }
-  return raw.trim();
+  const number = normalizeItalianNumber(raw);
+  if (!number) return "";
+  const rest = number.slice(2);
+  return `+39 ${rest.slice(0, 3)} ${rest.slice(3, 6)} ${rest.slice(6)}`;
 }
 
-/** I pulsanti di contatto vengono mostrati solo con numeri reali configurati. */
+/** I pulsanti di contatto vengono mostrati solo con numeri completi e validi. */
 export function hasWhatsApp() {
-  return getWhatsAppUrl() !== "#";
+  return Boolean(getWhatsAppNumber());
 }
 
 export function hasPhone() {
-  return getPhoneUrl() !== "#";
+  return Boolean(getPhoneNumber());
 }
