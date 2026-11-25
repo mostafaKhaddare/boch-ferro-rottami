@@ -1,5 +1,5 @@
 ﻿import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
 export const runtime = "nodejs";
 
@@ -68,13 +68,10 @@ export async function POST(request: Request) {
   }
 
   const to = process.env.CONTACT_TO_EMAIL ?? process.env.NEXT_PUBLIC_EMAIL;
-  const smtpUser = process.env.SMTP_USER;
-  const smtpPass = process.env.SMTP_PASS;
-  const smtpHost = process.env.SMTP_HOST ?? "smtp.gmail.com";
-  const smtpPort = Number(process.env.SMTP_PORT ?? "465");
-  const smtpSecure = (process.env.SMTP_SECURE ?? "true") === "true";
+  const apiKey = process.env.RESEND_API_KEY;
+  const from = process.env.CONTACT_FROM_EMAIL ?? "BOCH FERRO ROTTAMI <onboarding@resend.dev>";
 
-  if (!to || !smtpUser || !smtpPass) {
+  if (!to || !apiKey) {
     return NextResponse.json(
       { error: "Invio non disponibile al momento. Puoi contattarci tramite i canali indicati nella pagina Contatti." },
       { status: 503 }
@@ -105,15 +102,9 @@ export async function POST(request: Request) {
     .join("")}</table>`;
 
   try {
-    const transporter = nodemailer.createTransport({
-      host: smtpHost,
-      port: smtpPort,
-      secure: smtpSecure,
-      auth: { user: smtpUser, pass: smtpPass }
-    });
-
-    await transporter.sendMail({
-      from: `BOCH FERRO ROTTAMI <${smtpUser}>`,
+    const resend = new Resend(apiKey);
+    const { error } = await resend.emails.send({
+      from,
       to,
       subject,
       text,
@@ -121,9 +112,14 @@ export async function POST(request: Request) {
       replyTo: body.email?.trim() || undefined
     });
 
+    if (error) {
+      throw new Error(error.message);
+    }
+
     return NextResponse.json({ ok: true });
   } catch (err) {
     const detail = err instanceof Error ? err.message : String(err);
+    console.error("[contact] Errore invio email:", detail);
     return NextResponse.json(
       { error: "Invio email non riuscito.", detail: process.env.NODE_ENV === "development" ? detail : undefined },
       { status: 502 }
